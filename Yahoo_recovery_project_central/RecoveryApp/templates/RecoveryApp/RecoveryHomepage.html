@@ -1,0 +1,20 @@
+{% extends 'RecoveryApp/index.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Recovery Project</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+</head>
+<body>
+	<h2>Insert</h2>
+<form method="post" >
+	{% csrf_token %}
+  <textarea name="seed" rows="10" cols="100"></textarea>
+  <br>
+  <input type="submit" class="btn btn-primary">
+</form>
+
+</body>
+</html>
+{% endblock content %}

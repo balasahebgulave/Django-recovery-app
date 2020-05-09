@@ -1,0 +1,1438 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+
+        <!-- <meta http-equiv="refresh" content="2; URL=http://localhost:8000"> -->
+
+        <title></title>
+        
+         <!-- Bootstrap CSS CDN -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <!-- Our Custom CSS -->
+        <link rel="stylesheet" href="{% static '/style.css' %}">
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+
+
+
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.js"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.css"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.js"></script>
+
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+
+        <script type="text/javascript">
+            document.title = "Recovery " + new Date().toISOString().slice(0,10);
+        </script>
+            
+    </head>
+    <body>
+
+        <div class="wrapper">
+            <!-- Sidebar Holder -->
+            <nav id="sidebar">
+                <div class="sidebar-header">
+                    <center><h4>Recover Seeds</h4></center>
+                </div>
+
+                <ul class="list-unstyled components">
+                    <center><p>Selection of ISP</p></center>
+
+                    <!-- <center><li class="active">
+                        <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false">Home</a>
+                        <ul class="collapse list-unstyled" id="homeSubmenu">
+                            <li><a href="#">Yahoo</a></li>
+                            <li><a href="#">Gmail</a></li>
+                            <li><a href="#">Hotmail</a></li>
+                            <li><a href="#">Aol</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">About</a>
+                        <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">Pages</a>
+                        <ul class="collapse list-unstyled" id="pageSubmenu">
+                            <li><a href="#">Page 1</a></li>
+                            <li><a href="#">Page 2</a></li>
+                            <li><a href="#">Page 3</a></li>
+                        </ul>
+                    </li>
+                
+                    <li>
+                        <a href="#">Contact</a>
+                    </li> -->
+
+                    <center>
+                    <li  class="active"><a href="#">Yahoo</a></li>
+                    <li><a href="#">Gmail</a></li>
+                    <li><a href="#">Hotmail</a></li>
+                    <li><a href="#">Aol</a></li>
+                    </center>
+                </ul>
+
+                <ul class="list-unstyled CTAs">
+                    <li><a href="/" class="download">Home</a></li>
+                    <li><a href="/" class="article">Back</a></li>
+                </ul>
+            </nav>
+
+
+
+
+            <!-- Page Content Holder -->
+            <div id="content">
+                <h4 style="margin-bottom:1%"><center>Seed Recovery Portal</center></h4>
+                {% if filter %}
+                <nav class="navbar navbar-default">
+                    <div class="container-fluid">
+
+                        <div class="navbar-header">
+                            <button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn">
+                                <i class="glyphicon glyphicon-align-left"></i>
+                                <span>Toolbar</span>
+                            </button>
+                        </div>
+
+                        {% if check_admin %}
+
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="float: left">
+                            <ul class="nav navbar-nav navbar-right" >
+                                <!-- <li id="seedloglink"><a href="#">Live Log</a></li> -->
+                                <!-- <li id="seedclearloglink"><a href="#">Clear Log</a></li> -->
+                                <!-- <li id="insertseedlink"><a href="#">Insert Seed</a></li> -->
+                                <li id="allseedlink"><a href="#">All Seeds</a></li>
+                                <li id="clearloglink"><a href="#">Recovered Seed</a></li>
+                                <li id="uploadformatlink"><a href="#">Bbmanage File</a></li>
+                                <li id="flushseedlink"><a href="#">Not Recovered Seed</a></li>
+                                <li id="exceedattemptslink"><a href="#">Exceed Attempt Seed</a></li>
+                                <!-- <li id="enableexceedlink"><a href="#">Reattempt Exceed Seed</a></li> -->
+                                <li id="disabledlink"><a href="#">Disable Seeds</a></li>
+                                <li id="employeereportlink"><a href="#">Employee Wise Report</a></li>
+                                <li id="alldetailslink"><a href="#">All Report</a></li>
+                                <li id="visualizationlink"><a href="#">Show Visualization</a></li>
+                            </ul>
+                        </div>
+
+                        
+                        {% else %}
+
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="float: left">
+                            <ul class="nav navbar-nav navbar-right" >
+                                <!-- <li id="seedloglink"><a href="#">Live Log</a></li> -->
+                                <!-- <li id="seedclearloglink"><a href="#">Clear Log</a></li> -->
+                                <!-- <li id="insertseedlink"><a href="#">Insert Seed</a></li> -->
+                                <li id="allseedlink"><a href="#">All Seeds</a></li>
+                                <li id="clearloglink"><a href="#">Recovered Seed</a></li>  
+                                <li id="flushseedlink"><a href="#">Not Recovered Seed</a></li>
+                                <li id="exceedattemptslink"><a href="#">Exceed Attempt Seed</a></li>
+                                <!-- <li id="enableexceedlink"><a href="#">Reattempt Exceed Seed</a></li> -->
+                                <li id="disabledlink"><a href="#">Disable Seeds</a></li>
+                                <li id="employeereportlink"><a href="#">Employee Wise Report</a></li>
+                                <li id="alldetailslink"><a href="#">All Report</a></li>
+                                <li id="visualizationlink"><a href="#">Show Visualization</a></li>
+                            </ul>
+                        </div>
+
+                        {% endif %}
+
+
+                    </div>
+                </nav>
+
+
+
+                {% else %}
+
+                <nav class="navbar navbar-default">
+                    <div class="container-fluid">
+
+                        <div class="navbar-header">
+                            <button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn">
+                                <i class="glyphicon glyphicon-align-left"></i>
+                                <span>Toolbar</span>
+                            </button>
+                        </div>
+
+                        
+
+                        {% if month_wise %}
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="float: left">
+                            <ul class="nav navbar-nav navbar-right" >
+                                <li id="allseedlink"><a href="#"> All Seeds : {{month}}</a></li>
+                                <li id="employeereportlink"><a href="#">Employee Wise Report</a></li>
+                                <li id="alldetailslink"><a href="#">All Report</a></li>
+                                <li id="visualizationlink"><a href="#">Show Visualization</a></li>
+                            </ul>
+                        </div>
+
+
+                        {% elif date_wise %}
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="float: left">
+                            <ul class="nav navbar-nav navbar-right" >
+                        
+                                <li id="allseedlink"><a href="#">All Seeds</a></li>
+                                <li id="clearloglink"><a href="#">Recovered Seed</a></li>
+                                <li id="uploadformatlink"><a href="#">Bbmanage File</a></li>
+                                <li id="flushseedlink"><a href="#">Not Recovered Seed</a></li>
+                                <li id="exceedattemptslink"><a href="#">Exceed Attempt Seed</a></li>
+                               
+                                <li id="disabledlink"><a href="#">Disable Seeds</a></li>
+                                <li id="employeereportlink"><a href="#">Employee Wise Report</a></li>
+                                <li id="alldetailslink"><a href="#">All Report</a></li>
+                                <li id="visualizationlink"><a href="#">Show Visualization</a></li>
+                            </ul>
+                        </div>
+
+
+
+                        {% else %}
+
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="float: left">
+                            <ul class="nav navbar-nav navbar-right" >
+                                <li id="monthwise"><a href="#">Month Wise Report</a></li>
+                                <li id="datewise"><a href="#">Date Wise Report</a></li>
+                               <li id="employeereportlink"><a href="#">Employee Wise Report</a></li>
+                                <li id="seedloglink"><a href="#">Live Log</a></li>
+                                <li id="insertseedlink"><a href="#">Insert Seed</a></li>
+                                <li id="alldetailslink"><a href="#">All Report</a></li>
+                                <li id="visualizationlink"><a href="#">Show Visualization</a></li>
+                                <li id="seedclearloglink"><a href="#">Clear Log</a></li>
+                                <li id="enableexceedlink"><a href="#">Reattempt Exceed Seed</a></li>
+                            </ul>
+                        </div>
+
+                        {% endif %}
+
+
+                    </div>
+                </nav>
+
+
+
+                <div id="monthwisediv" style="display: none">
+                    <center><h5>Month Wise</h5></center>
+                    <div class="form-group">
+                        <form method="post">
+                            {% csrf_token %}
+                            <select name="month_filter" class="form-control">
+                                {% for i in month_filter %}
+                                {% if i.recovery_month != 'None' %}
+                                <option>{{i.recovery_month}}</option>
+                                {% endif %}
+                                {% endfor %}
+                            </select>
+                        <br>
+                        <button class="btn btn-primary">submit</button>
+                        </form>
+                    </div>
+                </div>
+
+
+
+                <div id="datewisediv" style="display: none">
+                    <center><h5>Date Wise</h5></center>
+                    <div class="form-group">
+                        <form method="post">
+                            {% csrf_token %}
+                            <select name="date_filter" class="form-control">
+                                {% for i in date_filter %}
+                                {% if i != 'None' %}
+                                <option>{{i}}</option>
+                                {% endif %}
+                                {% endfor %}
+                            </select>
+                        <br>
+                        <button class="btn btn-primary">submit</button>
+                        </form>
+                    </div>
+                </div>
+
+
+                {% endif %}
+
+
+                <div id="errordiv">
+                    {% if error %}
+                    <script type="text/javascript">
+                        $(document).ready(function () {
+                            $('#alldetailsdiv').hide();
+                            $('#livelogdiv').hide(); 
+                            $('#insertseeddiv').hide();  
+                            $('#clearlogdiv').hide();
+                            $('#flushseeddiv').hide();
+                            $('#alldetailsdiv').hide(); 
+                            $('#seedlogdiv').hide(); 
+
+                        });
+                    </script>
+                    <center style="color: red">Error Occured<p>{{error}}</p></center>
+
+                    <table id="seedlog" class="table table-striped table-bordered">
+                    <thead>
+                        <th>proxy</th>
+                        <th>firstname</th>
+                        <th>lastname</th>
+                        <th>gender</th>
+                        <th>birth_month</th>
+                        <th>birth_day</th>
+                        <th>birth_year</th>
+                        <th>username</th>
+                        <th>password</th>
+                        <th>phone</th>
+                        <th>employee_name</th>
+                    </thead>
+                    <tr>
+                        <td>104.144.138.178:3129</td>
+                        <td>Lakiesha</td>
+                        <td>Squires</td>
+                        <td>Female</td>
+                        <td>11</td>
+                        <td>15</td>
+                        <td>1996</td>
+                        <td>LakieshaSquiresmdn1vq</td>
+                        <td>4WnkKxwx9JYc</td>
+                        <td>684509177</td>
+                        <td>Balasaheb Gulave</td>
+                    </tr>
+                    </table>
+                    {% endif %}
+                </div>
+
+
+
+                <div id="employeereportdiv" style="display: none">
+                    <center><h5>Employee Wise Report</h5></center>
+
+                    <table id="employeerecord" class="table table-striped table-bordered">
+                        <thead>
+                            <th>Employee Name</th>
+                            <th>Total Seeds</th>
+                        </thead>
+                        {% for emp, count in employee_value %}
+                        <tr>
+                            <td>{{emp}}</td>
+                            <td>{{count}}</td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+
+
+                
+                <div id="seedlogdiv" style="display: none;">
+
+                <center><h5>Seed Log</h5></center>
+
+                <table id="seedlog" class="table table-striped table-bordered">
+                    <thead>
+                        <th>id</th>
+                        <th>log</th>
+                        <th>error</th>
+                        <th>attempt</th>
+                        <th>disable</th>
+                        <th>insert_date</th>
+                        <th>proxy</th>
+                        <th>firstname</th>
+                        <th>lastname</th>
+                        <th>gender</th>
+                        <th>birth_month</th>
+                        <th>birth_day</th>
+                        <th>birth_year</th>
+                        <th>username</th>
+                        <th>password</th>
+                        <th>phone</th>
+                        <th>recoveryemail</th>
+                        <th>recoverydone</th>
+                        <th>employee_name</th>
+                    </thead>
+                    {% for seed in allseeds %}
+                    <tr>
+                        <td>{{seed.id}}</td>
+                        <td>{{seed.log}}</td>
+                        <td>{{seed.error}}</td>
+                        <td>{{seed.recovery_attempt}}</td>
+                        <td>{{seed.disabled}}</td>
+                        <td>{{seed.insert_date}}</td>
+                        <td>{{seed.proxy}}</td>
+                        <td>{{seed.firstname}}</td>
+                        <td>{{seed.lastname}}</td>
+                        <td>{{seed.gender}}</td>
+                        <td>{{seed.birth_month}}</td>
+                        <td>{{seed.birth_day}}</td>
+                        <td>{{seed.birth_year}}</td>
+                        <td>{{seed.username}}</td>
+                        <td>{{seed.password}}</td>
+                        <td>{{seed.phone}}</td>
+                        <td>{{seed.recoveryemail}}</td>
+                        <td>{{seed.recoverydone}}</td>
+                        <td>{{seed.employee_name}}</td>
+                        
+                    </tr>
+                    {% endfor %}
+                </table>
+
+                </div>
+                
+                
+                <div id="insertseeddiv" style="display: none">
+                    <center><h5>Insert Seed</h5></center>
+                    
+                    <table id="seedlog" class="table table-striped table-bordered">
+                    <thead>
+                        <th>proxy</th>
+                        <th>firstname</th>
+                        <th>lastname</th>
+                        <th>gender</th>
+                        <th>birth_month</th>
+                        <th>birth_day</th>
+                        <th>birth_year</th>
+                        <th>username</th>
+                        <th>password</th>
+                        <th>phone</th>
+                        <th>employee_name</th>
+                    </thead>
+                    <tr>
+                        <td>104.144.138.178:3129</td>
+                        <td>Lakiesha</td>
+                        <td>Squires</td>
+                        <td>Female</td>
+                        <td>11</td>
+                        <td>15</td>
+                        <td>1996</td>
+                        <td>LakieshaSquiresmdn1vq</td>
+                        <td>4WnkKxwx9JYc</td>
+                        <td>684509177</td>
+                        <td>Balasaheb Gulave</td>
+                    </tr>
+                    </table>
+
+                    <center><h5 style="color: brown">Note : Insert data in above format only</h5></center><br>
+                    
+                    <form method="post" >
+                        {% csrf_token %}
+                      <textarea name="seed" rows="15" class="form-control col-xs-12"></textarea>
+                      <button type="submit" class="btn btn-primary" style="margin-top : 1%">submit</button> 
+                    </form>
+                </div>
+
+
+
+
+                <div id="allseediv" style="display: none">
+                    <center><h5>All Seeds</h5></center>
+                    <table id="allseed" class="table table-striped table-bordered">
+                    <thead>
+                        <th>id</th>
+                        <th>log</th>
+                        
+                        <th>attempt</th>
+                        <th>disable</th>
+                        <th>insert_date</th>
+                        <th>proxy</th>
+                        <th>firstname</th>
+                        <th>lastname</th>
+                        <th>gender</th>
+                        <th>birth_month</th>
+                        <th>birth_day</th>
+                        <th>birth_year</th>
+                        <th>username</th>
+                        <th>password</th>
+                        <th>phone</th>
+                        <th>recoveryemail</th>
+                        <th>recoverydone</th>
+                        <th>employee_name</th>
+                    </thead>
+                    {% for seed in recovered %}
+                    <tr>
+                        <td>{{seed.id}}</td>
+                        <td>{{seed.log}}</td>
+                       
+                        <td>{{seed.recovery_attempt}}</td>
+                        <td>{{seed.disabled}}</td>
+                        <td>{{seed.insert_date}}</td>
+                        <td>{{seed.proxy}}</td>
+                        <td>{{seed.firstname}}</td>
+                        <td>{{seed.lastname}}</td>
+                        <td>{{seed.gender}}</td>
+                        <td>{{seed.birth_month}}</td>
+                        <td>{{seed.birth_day}}</td>
+                        <td>{{seed.birth_year}}</td>
+                        <td>{{seed.username}}</td>
+                        <td>{{seed.password}}</td>
+                        <td>{{seed.phone}}</td>
+                        <td>{{seed.recoveryemail}}</td>
+                        <td>{{seed.recoverydone}}</td>
+                        <td>{{seed.employee_name}}</td>
+                        
+                    </tr>
+                    {% endfor %}
+
+                    {% for seed in notrecovered %}
+                    <tr>
+                        <td>{{seed.id}}</td>
+                        <td>{{seed.log}}</td>
+                       
+                        <td>{{seed.recovery_attempt}}</td>
+                        <td>{{seed.disabled}}</td>
+                        <td>{{seed.insert_date}}</td>
+                        <td>{{seed.proxy}}</td>
+                        <td>{{seed.firstname}}</td>
+                        <td>{{seed.lastname}}</td>
+                        <td>{{seed.gender}}</td>
+                        <td>{{seed.birth_month}}</td>
+                        <td>{{seed.birth_day}}</td>
+                        <td>{{seed.birth_year}}</td>
+                        <td>{{seed.username}}</td>
+                        <td>{{seed.password}}</td>
+                        <td>{{seed.phone}}</td>
+                        <td>{{seed.recoveryemail}}</td>
+                        <td>{{seed.recoverydone}}</td>
+                        <td>{{seed.employee_name}}</td>
+                        
+                    </tr>
+                    {% endfor %}
+                </table>
+                </div>
+
+
+
+
+                <div id="clearlogdiv" style="display: none">
+                    <center><h5>Recovered Seeds</h5></center>
+                    <table id="recover" class="table table-striped table-bordered">
+                    <thead>
+                        <th>id</th>
+                        <th>log</th>
+                        <th>error</th>
+                        <th>attempt</th>
+                        <th>disable</th>
+                        <th>insert_date</th>
+                        <th>proxy</th>
+                        <th>firstname</th>
+                        <th>lastname</th>
+                        <th>gender</th>
+                        <th>birth_month</th>
+                        <th>birth_day</th>
+                        <th>birth_year</th>
+                        <th>username</th>
+                        <th>password</th>
+                        <th>phone</th>
+                        <th>recoveryemail</th>
+                        <th>recoverydone</th>
+                        <th>employee_name</th>
+                    </thead>
+                    {% for seed in recovered %}
+                    <tr>
+                        <td>{{seed.id}}</td>
+                        <td>{{seed.log}}</td>
+                        <td>{{seed.error}}</td>
+                        <td>{{seed.recovery_attempt}}</td>
+                        <td>{{seed.disabled}}</td>
+                        <td>{{seed.insert_date}}</td>
+                        <td>{{seed.proxy}}</td>
+                        <td>{{seed.firstname}}</td>
+                        <td>{{seed.lastname}}</td>
+                        <td>{{seed.gender}}</td>
+                        <td>{{seed.birth_month}}</td>
+                        <td>{{seed.birth_day}}</td>
+                        <td>{{seed.birth_year}}</td>
+                        <td>{{seed.username}}</td>
+                        <td>{{seed.password}}</td>
+                        <td>{{seed.phone}}</td>
+                        <td>{{seed.recoveryemail}}</td>
+                        <td>{{seed.recoverydone}}</td>
+                        <td>{{seed.employee_name}}</td>
+                        
+                    </tr>
+                    {% endfor %}
+                </table>
+                </div>
+
+
+
+
+
+                <div id="uploadformatdiv" style="display: none">
+                    <center><h5>Bbmanage Uploadable Seeds File</h5></center>
+                    <table id="uploadformat" class="table table-striped table-bordered">
+                    <thead>
+                        <th>Proxy</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Gender</th>
+                        <th>Birth Month</th>
+                        <th>Birth Day</th>
+                        <th>Birth Year</th>
+                        <th>Username</th>
+                        <th>Password</th>
+                        <th>Phone Number</th>
+                        <th>Email Address</th>
+                    </thead>
+                    {% for seed in recovered %}
+                    <tr>
+                        <td>{{seed.proxy}}</td>
+                        <td>{{seed.firstname}}</td>
+                        <td>{{seed.lastname}}</td>
+                        <td>{{seed.gender}}</td>
+                        <td>{{seed.birth_month}}</td>
+                        <td>{{seed.birth_day}}</td>
+                        <td>{{seed.birth_year}}</td>
+                        <td>{{seed.username}}</td>
+                        <td>{{seed.password}}</td>
+                        <td>{{seed.phone}}</td>
+                        <td>{{seed.recoveryemail}}</td>                 
+                    </tr>
+                    {% endfor %}
+                </table>
+                </div>
+
+
+                
+
+
+                <div id="flushseeddiv" style="display: none">
+                    <center><h5>Not Recovered Seeds</h5></center>
+                    <table id="notrecover" class="table table-striped table-bordered">
+                    <thead>
+                        <th>id</th>
+                        <th>log</th>
+                        <th>error</th>
+                        <th>attempt</th>
+                        <th>disable</th>
+                        <th>insert_date</th>
+                        <th>proxy</th>
+                        <th>firstname</th>
+                        <th>lastname</th>
+                        <th>gender</th>
+                        <th>birth_month</th>
+                        <th>birth_day</th>
+                        <th>birth_year</th>
+                        <th>username</th>
+                        <th>password</th>
+                        <th>phone</th>
+                        <th>recoveryemail</th>
+                        <th>recoverydone</th>
+                        <th>employee_name</th>
+                    </thead>
+                    {% for seed in notrecovered %}
+                    <tr>
+                        <td>{{seed.id}}</td>
+                        <td>{{seed.log}}</td>
+                        <td>{{seed.error}}</td>
+                        <td>{{seed.recovery_attempt}}</td>
+                        <td>{{seed.disabled}}</td>
+                        <td>{{seed.insert_date}}</td>
+                        <td>{{seed.proxy}}</td>
+                        <td>{{seed.firstname}}</td>
+                        <td>{{seed.lastname}}</td>
+                        <td>{{seed.gender}}</td>
+                        <td>{{seed.birth_month}}</td>
+                        <td>{{seed.birth_day}}</td>
+                        <td>{{seed.birth_year}}</td>
+                        <td>{{seed.username}}</td>
+                        <td>{{seed.password}}</td>
+                        <td>{{seed.phone}}</td>
+                        <td>{{seed.recoveryemail}}</td>
+                        <td>{{seed.recoverydone}}</td>
+                        <td>{{seed.employee_name}}</td>
+
+                        
+                    </tr>
+                    {% endfor %}
+                </table>
+                </div>
+                
+
+
+                <div id="exceedattemptsdiv" style="display: none">
+                    <center><h5>Exceed Recovery Attempt Seeds</h5></center>
+                    <table id="exceedattempts" class="table table-striped table-bordered">
+                    <thead>
+                        <th>id</th>
+                        <th>log</th>
+                        <th>error</th>
+                        <th>attempt</th>
+                        <th>disable</th>
+                        <th>insert_date</th>
+                        <th>proxy</th>
+                        <th>firstname</th>
+                        <th>lastname</th>
+                        <th>gender</th>
+                        <th>birth_month</th>
+                        <th>birth_day</th>
+                        <th>birth_year</th>
+                        <th>username</th>
+                        <th>password</th>
+                        <th>phone</th>
+                        <th>recoveryemail</th>
+                        <th>recoverydone</th>
+                        <th>employee_name</th>
+                    </thead>
+                    {% for seed in exceedattempts %}
+                    <tr>
+                        <td>{{seed.id}}</td>
+                        <td>{{seed.log}}</td>
+                        <td>{{seed.error}}</td>
+                        <td>{{seed.recovery_attempt}}</td>
+                        <td>{{seed.disabled}}</td>
+                        <td>{{seed.insert_date}}</td>
+                        <td>{{seed.proxy}}</td>
+                        <td>{{seed.firstname}}</td>
+                        <td>{{seed.lastname}}</td>
+                        <td>{{seed.gender}}</td>
+                        <td>{{seed.birth_month}}</td>
+                        <td>{{seed.birth_day}}</td>
+                        <td>{{seed.birth_year}}</td>
+                        <td>{{seed.username}}</td>
+                        <td>{{seed.password}}</td>
+                        <td>{{seed.phone}}</td>
+                        <td>{{seed.recoveryemail}}</td>
+                        <td>{{seed.recoverydone}}</td>
+                        <td>{{seed.employee_name}}</td>
+
+                        
+                    </tr>
+                    {% endfor %}
+                </table>
+                </div>
+                
+
+
+
+                <div id="disablediv" style="display: none">
+                    <center><h5>Disable Seeds</h5></center>
+                    <table id="disable" class="table table-striped table-bordered">
+                    <thead>
+                        <th>id</th>
+                        <th>log</th>
+                        <th>error</th>
+                        <th>attempt</th>
+                        <th>disable</th>
+                        <th>insert_date</th>
+                        <th>proxy</th>
+                        <th>firstname</th>
+                        <th>lastname</th>
+                        <th>gender</th>
+                        <th>birth_month</th>
+                        <th>birth_day</th>
+                        <th>birth_year</th>
+                        <th>username</th>
+                        <th>password</th>
+                        <th>phone</th>
+                        <th>recoveryemail</th>
+                        <th>recoverydone</th>
+                        <th>employee_name</th>
+                    </thead>
+                    {% for seed in disabled %}
+                    <tr>
+                        <td>{{seed.id}}</td>
+                        <td>{{seed.log}}</td>
+                        <td>{{seed.error}}</td>
+                        <td>{{seed.recovery_attempt}}</td>
+                        <td>{{seed.disabled}}</td>
+                        <td>{{seed.insert_date}}</td>
+                        <td>{{seed.proxy}}</td>
+                        <td>{{seed.firstname}}</td>
+                        <td>{{seed.lastname}}</td>
+                        <td>{{seed.gender}}</td>
+                        <td>{{seed.birth_month}}</td>
+                        <td>{{seed.birth_day}}</td>
+                        <td>{{seed.birth_year}}</td>
+                        <td>{{seed.username}}</td>
+                        <td>{{seed.password}}</td>
+                        <td>{{seed.phone}}</td>
+                        <td>{{seed.recoveryemail}}</td>
+                        <td>{{seed.recoverydone}}</td>
+                        <td>{{seed.employee_name}}</td>
+                     
+                    </tr>
+                    {% endfor %}
+                </table>
+                </div>
+
+
+
+
+                
+                <div id="alldetailsdiv">
+
+                    <table id="allseed" class="table table-striped table-bordered">
+                        <center><h5>All Seeds Reports</h5></center>
+                        <thead>
+                            <th>Total Seeds</th>
+                            <th>Recovered Seeds</th>
+                            <th>Not Recovered Seeds</th>
+                            <th>Exceed Attempts Seeds</th>
+                            <th>Disabled Seeds</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                            <td>{{total_seeds}}</td>
+                            {% for i in results %}
+                            <td>{{i}}</td>
+                            {% endfor %}
+                            </tr>
+                        </tbody>
+                    </table>
+
+                   <!--  <center><h3>All Seeds</h3></center>
+                    <table id="allseed" class="table table-striped table-bordered">
+                    <thead>
+                        <th>id</th>
+                        <th>log</th>
+                        <th>error</th>
+                        <th>attempt</th>
+                        <th>disable</th>
+                        <th>insert_date</th>
+                        <th>proxy</th>
+                        <th>firstname</th>
+                        <th>lastname</th>
+                        <th>gender</th>
+                        <th>birth_month</th>
+                        <th>birth_day</th>
+                        <th>birth_year</th>
+                        <th>username</th>
+                        <th>password</th>
+                        <th>phone</th>
+                        <th>recoveryemail</th>
+                        <th>recoverydone</th>
+                        <th>employee_name</th>
+                    </thead>
+                    {% for seed in allseeds %}
+                    <tr>
+                        <td>{{seed.id}}</td>
+                        <td>{{seed.log}}</td>
+                        <td>{{seed.error}}</td>
+                        <td>{{seed.recovery_attempt}}</td>
+                        <td>{{seed.disabled}}</td>
+                        <td>{{seed.insert_date}}</td>
+                        <td>{{seed.proxy}}</td>
+                        <td>{{seed.firstname}}</td>
+                        <td>{{seed.lastname}}</td>
+                        <td>{{seed.gender}}</td>
+                        <td>{{seed.birth_month}}</td>
+                        <td>{{seed.birth_day}}</td>
+                        <td>{{seed.birth_year}}</td>
+                        <td>{{seed.username}}</td>
+                        <td>{{seed.password}}</td>
+                        <td>{{seed.phone}}</td>
+                        <td>{{seed.recoveryemail}}</td>
+                        <td>{{seed.recoverydone}}</td>
+                        <td>{{seed.employee_name}}</td>
+                        
+                    </tr>
+                    {% endfor %}
+                </table> -->
+                </div>
+
+            <div id="livelogdiv" style="display: none">
+                <center><h5>Live Log</h5></center>
+                <table id="livelog" class="table table-hover table-bordered">
+                    <thead>
+                        <th>id</th>
+                        <th>log</th>
+                        <th>error</th>
+                        <th>attempt</th>
+                        <th>disable</th>
+                        <th>insert_date</th>
+                        <th>proxy</th>
+                        <th>firstname</th>
+                        <th>lastname</th>
+                        <th>gender</th>
+                        <th>birth_month</th>
+                        <th>birth_day</th>
+                        <th>birth_year</th>
+                        <th>username</th>
+                        <th>password</th>
+                        <th>phone</th>
+                        <th>recoveryemail</th>
+                        <th>recoverydone</th>
+                        <th>employee_name</th>
+                    </thead>
+
+                    <tbody id="temp">
+                        
+                    </tbody>      
+                </table>
+            </div>
+
+        <div id="visualizationdiv" style="display: none">
+            <div class="container">
+                <ul class="nav navbar-nav" style="margin-left: 25%">
+                    <li id="pie" onclick="shochart(this.id)"><a href="#">Pie Chart</a></li>
+                    <li id="bar" onclick="shochart(this.id)"><a href="#">Bar Chart</a></li>
+                    <li id="line" onclick="shochart(this.id)"><a href="#">Line Chart</a></li>
+                    <li id="radar" onclick="shochart(this.id)"><a href="#">Radar Chart</a></li>
+                    <li id="doughnut" onclick="shochart(this.id)"><a href="#">Doughnut Chart</a></li>
+                </ul>
+
+                <div>
+                    <canvas id="myChart"></canvas>
+                </div>
+
+            </div>
+
+    </div>
+
+    
+
+        <!-- jQuery CDN -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+         <!-- Bootstrap Js CDN -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+         <script type="text/javascript">
+             $(document).ready(function () {
+                 $('#sidebarCollapse').on('click', function () {
+                     $('#sidebar').toggleClass('active');
+                 });
+             });
+         </script>
+
+
+         <script type="text/javascript">
+                $(document).ready(function() {
+                $('#monthwise').click(function(){
+                    $('#monthwisediv').show();  
+                    $('#datewisediv').hide();
+                    $('#flushseeddiv').hide();
+                    $('#clearlogdiv').hide();
+                    $('#insertseeddiv').hide();
+                    $('#seedlogdiv').hide(); 
+                    $('#alldetailsdiv').hide();
+                    $('#livelogdiv').hide();
+                    $('#errordiv').hide();
+                    $('#exceedattemptsdiv').hide();
+                    $('#disablediv').hide();
+                    $('#visualizationdiv').hide(); 
+                    $('#employeereportdiv').hide();  
+                    $('#uploadformatdiv').hide(); 
+                    $('#allseediv').hide();          
+                });
+            } );
+         </script>
+
+         <script type="text/javascript">
+                $(document).ready(function() {
+                $('#datewise').click(function(){
+                    $('#datewisediv').show();
+                    $('#monthwisediv').hide();  
+                    $('#flushseeddiv').hide();
+                    $('#clearlogdiv').hide();
+                    $('#insertseeddiv').hide();
+                    $('#seedlogdiv').hide(); 
+                    $('#alldetailsdiv').hide();
+                    $('#livelogdiv').hide();
+                    $('#errordiv').hide();
+                    $('#exceedattemptsdiv').hide();
+                    $('#disablediv').hide();
+                    $('#visualizationdiv').hide(); 
+                    $('#employeereportdiv').hide();  
+                    $('#uploadformatdiv').hide(); 
+                    $('#allseediv').hide();         
+                });
+            } );
+         </script>
+
+
+         <script type="text/javascript">
+                $(document).ready(function() {
+                $('#seedloglink').click(function(){
+                    $('#livelogdiv').show(); 
+                    $('#insertseeddiv').hide();  
+                    $('#clearlogdiv').hide();
+                    $('#flushseeddiv').hide();
+                    $('#alldetailsdiv').hide(); 
+                    $('#seedlogdiv').hide(); 
+                    $('#errordiv').hide();
+                    $('#exceedattemptsdiv').hide();
+                    $('#disablediv').hide(); 
+                    $('#visualizationdiv').hide(); 
+                    $('#monthwisediv').hide();  
+                    $('#datewisediv').hide();   
+                    $('#employeereportdiv').hide();  
+                    $('#uploadformatdiv').hide(); 
+                    $('#allseediv').hide();       
+                });
+            } );
+         </script>
+
+
+         <script type="text/javascript">
+                $(document).ready(function() {
+                $('#employeereportlink').click(function(){
+                    $('#livelogdiv').hide(); 
+                    $('#insertseeddiv').hide();  
+                    $('#clearlogdiv').hide();
+                    $('#flushseeddiv').hide();
+                    $('#alldetailsdiv').hide(); 
+                    $('#seedlogdiv').hide(); 
+                    $('#errordiv').hide();
+                    $('#exceedattemptsdiv').hide();
+                    $('#disablediv').hide(); 
+                    $('#visualizationdiv').hide(); 
+                    $('#monthwisediv').hide();  
+                    $('#datewisediv').hide();   
+                    $('#employeereportdiv').show();  
+                    $('#uploadformatdiv').hide(); 
+                    $('#allseediv').hide();       
+                });
+            } );
+         </script>
+
+
+         <script type="text/javascript">
+                $(document).ready(function() {
+                $('#insertseedlink').click(function(){
+                    $('#insertseeddiv').show();
+                    $('#seedlogdiv').hide(); 
+                    $('#clearlogdiv').hide();
+                    $('#flushseeddiv').hide();
+                    $('#alldetailsdiv').hide();
+                    $('#livelogdiv').hide();
+                    $('#errordiv').hide();
+                    $('#exceedattemptsdiv').hide();
+                    $('#disablediv').hide();   
+                    $('#visualizationdiv').hide(); 
+                    $('#monthwisediv').hide();  
+                    $('#datewisediv').hide();
+                    $('#employeereportdiv').hide();
+                    $('#uploadformatdiv').hide(); 
+                    $('#allseediv').hide();
+                });
+            } );
+         </script>
+
+
+         <script type="text/javascript">
+                $(document).ready(function() {
+                $('#flushseedlink').click(function(){
+                    $('#flushseeddiv').show();
+                    $('#clearlogdiv').hide();
+                    $('#insertseeddiv').hide();
+                    $('#seedlogdiv').hide(); 
+                    $('#alldetailsdiv').hide();
+                    $('#livelogdiv').hide();
+                    $('#errordiv').hide();
+                    $('#exceedattemptsdiv').hide();
+                    $('#disablediv').hide();
+                    $('#visualizationdiv').hide(); 
+                    $('#employeereportdiv').hide();  
+                    $('#uploadformatdiv').hide(); 
+                    $('#allseediv').hide(); 
+
+                });
+            } );
+         </script>
+
+
+         <script type="text/javascript">
+                $(document).ready(function() {
+                $('#alldetailslink').click(function(){
+                    $('#alldetailsdiv').show();
+                    $('#flushseeddiv').hide();
+                    $('#clearlogdiv').hide();
+                    $('#insertseeddiv').hide();
+                    $('#seedlogdiv').hide(); 
+                    $('#livelogdiv').hide();
+                    $('#errordiv').hide();
+                    $('#exceedattemptsdiv').hide();
+                    $('#disablediv').hide();  
+                    $('#visualizationdiv').hide();   
+                    $('#monthwisediv').hide();  
+                    $('#datewisediv').hide();  
+                    $('#employeereportdiv').hide();
+                    $('#uploadformatdiv').hide();
+                    $('#allseediv').hide();  
+
+                });
+            } );
+         </script>
+
+
+         <script type="text/javascript">
+                $(document).ready(function() {
+                $('#exceedattemptslink').click(function(){
+                    $('#exceedattemptsdiv').show();
+                    $('#flushseeddiv').hide();
+                    $('#clearlogdiv').hide();
+                    $('#insertseeddiv').hide();
+                    $('#seedlogdiv').hide(); 
+                    $('#livelogdiv').hide();
+                    $('#errordiv').hide();
+                    $('#alldetailsdiv').hide();
+                    $('#disablediv').hide();
+                    $('#visualizationdiv').hide();  
+                    $('#employeereportdiv').hide();
+                    $('#uploadformatdiv').hide(); 
+                    $('#allseediv').hide();
+
+
+                });
+            } );
+         </script>
+
+
+         <script type="text/javascript">
+                $(document).ready(function() {
+                $('#disabledlink').click(function(){
+                    $('#exceedattemptsdiv').hide();
+                    $('#flushseeddiv').hide();
+                    $('#clearlogdiv').hide();
+                    $('#insertseeddiv').hide();
+                    $('#seedlogdiv').hide(); 
+                    $('#livelogdiv').hide();
+                    $('#errordiv').hide();
+                    $('#alldetailsdiv').hide();
+                    $('#disablediv').show();
+                    $('#visualizationdiv').hide();  
+                    $('#employeereportdiv').hide();  
+                    $('#uploadformatdiv').hide();
+                    $('#allseediv').hide();   
+
+                });
+            } );
+         </script>
+
+
+         <script type="text/javascript">
+                $(document).ready(function() {
+                $('#visualizationlink').click(function(){
+                    $('#exceedattemptsdiv').hide();
+                    $('#flushseeddiv').hide();
+                    $('#clearlogdiv').hide();
+                    $('#insertseeddiv').hide();
+                    $('#seedlogdiv').hide(); 
+                    $('#livelogdiv').hide();
+                    $('#errordiv').hide();
+                    $('#alldetailsdiv').hide();
+                    $('#disablediv').hide();
+                    $('#visualizationdiv').show(); 
+                    $('#employeereportdiv').hide();   
+                    $('#uploadformatdiv').hide();
+                    $('#allseediv').hide();   
+
+                });
+            } );
+         </script>
+
+
+
+         <script type="text/javascript">
+                $(document).ready(function() {
+                $('#clearloglink').click(function(){
+                    $('#exceedattemptsdiv').hide();
+                    $('#flushseeddiv').hide();
+                    $('#clearlogdiv').show();
+                    $('#insertseeddiv').hide();
+                    $('#seedlogdiv').hide(); 
+                    $('#livelogdiv').hide();
+                    $('#errordiv').hide();
+                    $('#alldetailsdiv').hide();
+                    $('#disablediv').hide();
+                    $('#visualizationdiv').hide();
+                    $('#employeereportdiv').hide();
+                    $('#uploadformatdiv').hide();
+                    $('#allseediv').hide();  
+
+
+                });
+            } );
+         </script>
+
+
+
+
+         <script type="text/javascript">
+                $(document).ready(function() {
+                $('#uploadformatlink').click(function(){
+                    $('#exceedattemptsdiv').hide();
+                    $('#flushseeddiv').hide();
+                    $('#clearlogdiv').hide();
+                    $('#insertseeddiv').hide();
+                    $('#seedlogdiv').hide(); 
+                    $('#livelogdiv').hide();
+                    $('#errordiv').hide();
+                    $('#alldetailsdiv').hide();
+                    $('#disablediv').hide();
+                    $('#visualizationdiv').hide();
+                    $('#employeereportdiv').hide();
+                    $('#uploadformatdiv').show();  
+                    $('#allseediv').hide(); 
+
+
+                });
+            } );
+         </script>
+
+
+
+
+         <script type="text/javascript">
+                $(document).ready(function() {
+                $('#allseedlink').click(function(){
+                    $('#exceedattemptsdiv').hide();
+                    $('#flushseeddiv').hide();
+                    $('#clearlogdiv').hide();
+                    $('#insertseeddiv').hide();
+                    $('#seedlogdiv').hide(); 
+                    $('#livelogdiv').hide();
+                    $('#errordiv').hide();
+                    $('#alldetailsdiv').hide();
+                    $('#disablediv').hide();
+                    $('#visualizationdiv').hide();
+                    $('#employeereportdiv').hide();
+                    $('#uploadformatdiv').hide(); 
+                    $('#allseediv').show(); 
+
+
+                });
+            } );
+         </script>
+
+
+
+
+         <script type="text/javascript">
+             $("#seedclearloglink").click(function(){
+                if (confirm('Clearing log wait for 5 seconds')){
+              $.get("http://yns.imsinternal.com:8000/clearlog", function(data, status){
+                confirm('Log Cleared Successfully');
+              });
+          }
+            });
+         </script>
+
+
+         <script type="text/javascript">
+             $("#enableexceedlink").click(function(){
+                if (confirm('Enableling Exceed Recovery Attempts Seeds wait for 5 seconds')){
+              $.get("http://yns.imsinternal.com:8000/enableexceed", function(data, status){
+                confirm('Enabled Exceed Recovery Attempts Seeds Successfully');
+              })
+          }
+            });
+         </script>
+
+
+
+        <script type="text/javascript"> 
+            setInterval(function() {
+                $(document).ready(function(){
+                     $.ajax({
+                         url:'http://yns.imsinternal.com:8000/getlivedata',
+                    method:'get',
+                    success:function(data){
+                        var data = JSON.parse(data);
+                        console.log(data)
+                        var row = "";
+                        data.forEach(function(value){
+
+                        row = row + "<tr><td>"+value.id+"</td><td>"+value.log+"</td><td>"+value.error+"</td><td>"+value.recovery_attempt+"</td><td>"+value.disabled+"</td><td>"+value.insert_date+"</td><td>"+value.proxy+"</td><td>"+value.firstname+"</td><td>"+value.lastname+"</td><td>"+value.gender+"</td><td>"+value.birth_month+"</td><td>"+value.birth_day+"</td><td>"+value.birth_year+"</td><td>"+value.username+"</td><td>"+value.password+"</td><td>"+value.phone+"</td><td>"+value.recoveryemail+"</td><td>"+value.recoverydone+"</td><td>"+value.employee_name+"</td></tr>";
+                        });
+                        
+                        $('#temp').html(row);
+                    }
+                     });
+                });
+                
+            }, 20000);
+
+        </script>
+
+<!-- 
+<script type="text/javascript">
+                $(document).ready(function() {
+                $('#livelog').DataTable();
+            } );
+</script>
+ -->
+
+
+<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.0/js/dataTables.buttons.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.0/js/buttons.html5.min.js"></script>
+
+
+
+<script type="text/javascript">
+                $(document).ready(function() {
+                $('#allseed').DataTable({
+                searching: true,
+                deferRender: true,
+                dom: 'Bfrtip',
+                buttons: [
+                    'copyHtml5',
+                    'excelHtml5',
+                    'csvHtml5'
+                    ]
+                } );
+            } );
+</script>
+
+
+<script type="text/javascript">
+                $(document).ready(function() {
+                $('#recover').DataTable({
+                searching: true,
+                deferRender: true,
+                dom: 'Bfrtip',
+                buttons: [
+                    'copyHtml5',
+                    'excelHtml5',
+                    'csvHtml5',
+                    'pdfHtml5'
+                    ]
+                } );
+            } );
+</script>
+
+
+<script type="text/javascript">
+                $(document).ready(function() {
+                $('#notrecover').DataTable({
+                searching: true,
+                deferRender: true,
+                dom: 'Bfrtip',
+                buttons: [
+                    'copyHtml5',
+                    'excelHtml5',
+                    'csvHtml5',
+                    'pdfHtml5'
+                    ]
+                } );
+            } );
+</script>
+
+
+<script type="text/javascript">
+                $(document).ready(function() {
+                $('#exceedattempts').DataTable({
+                deferRender: true,
+                searching: true,
+                dom: 'Bfrtip',
+                buttons: [
+                    'copyHtml5',
+                    'excelHtml5',
+                    'csvHtml5',
+                    'pdfHtml5'
+                    ]
+                } );
+            } );
+</script>
+
+
+
+<script type="text/javascript">
+                $(document).ready(function() {
+                $('#disable').DataTable({
+                deferRender: true,
+                searching: true,
+                dom: 'Bfrtip',
+                buttons: [
+                    'copyHtml5',
+                    'excelHtml5',
+                    'csvHtml5',
+                    'pdfHtml5'
+                    ]
+                } );
+            } );
+</script>
+
+
+
+<script type="text/javascript">
+                $(document).ready(function() {
+                $('#uploadformat').DataTable({
+                deferRender: true,
+                searching: true,
+                dom: 'Bfrtip',
+                buttons: [
+                    'copyHtml5',
+                    'excelHtml5',
+                    'csvHtml5',
+                    'pdfHtml5'
+                    ]
+                } );
+            } );
+</script>
+
+
+<script>
+    function shochart(charttype){
+            var ctx = document.getElementById('myChart').getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: charttype,
+                data: {
+                    labels: ['Recovered', 'Not Recovered', 'Exceed Attempts', 'Disabled'],
+                    datasets: [{
+                        label: '{{total_seeds}} of Seeds',
+                        data: {{results}},
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            });
+
+    }
+</script>
+
+
+<script>
+$(document).ready(function(){
+  $("li").click(function(){
+    $(this).show();
+  });
+});
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#sidebarCollapse").click(function(){
+            $("#tools").toggle();
+        })
+    })
+
+</script>
+
+</body>
+</html>
